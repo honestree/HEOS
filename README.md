@@ -13,9 +13,7 @@ User can use mouse to drag around the model, zoom in, zoom out and select magnet
 ## Problem to solve
 
 This project would use to calculate
-$\psi(r,\theta,\phi)=R(r)\Theta(\theta)\Phi(\phi)=NR_{n,l}(r)P_l^m(\cos\theta){\rm e}^{{\rm i}m\phi}\qquad$
-
-
+![](https://i.imgur.com/41VUfMK.png)
 ## Perspective users
 
 For student that first learned a thing or two on Atomic Physic, and want to have a brief idea for what these quantum number might affect on the orbit model.
