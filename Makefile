@@ -1,12 +1,23 @@
 .PHONY: clean all
-all: MatrixControl.o HEOS
 
-MatrixControl.o: MatrixControl.hpp MatrixControl.cpp
-	g++ -c MatrixControl.hpp MatrixControl.cpp -lglfw -lGL -lm -lX11 -lpthread -lXi -lXrandr -ldl -lGLEW
+CXX = g++
+GL_FLAG = -lglfw -lGL -lm -lX11 -lpthread -lXi -lXrandr -ldl -lGLEW
+ModelDemonstrator_O = MatrixControl.o loadShader.o
 
-HEOS: main.cpp loadShader.cpp MatrixControl.o
-	g++ main.cpp loadShader.cpp MatrixControl.o -o HEOS -lglfw -lGL -lm -lX11 -lpthread -lXi -lXrandr -ldl -lGLEW
+LIBARY_O = ${ModelDemonstrator_O}
+
+
+all: ${LIBARY_O} HEOS
+
+MatrixControl.o: ModelDemonstrator/MatrixControl.hpp ModelDemonstrator/MatrixControl.cpp
+	${CXX} -c ModelDemonstrator/MatrixControl.cpp ${GL_FLAG}
+
+loadShader.o: ModelDemonstrator/loadShader.cpp ModelDemonstrator/loadShader.hpp
+	${CXX} -c ModelDemonstrator/loadShader.cpp ${GL_FLAG}
+
+HEOS: main.cpp ${LIBARY_O}
+	${CXX} main.cpp ${LIBARY_O} -o HEOS ${GL_FLAG}
 
 clean:
-	rm -rf *.o *.gch HEOS
+	rm -rf *.o */*.gch HEOS 
 

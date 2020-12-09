@@ -13,12 +13,12 @@
 #include <glm/glm.hpp>
 
 // Include loadShader.hpp
-#include "loadShader.hpp"
+#include "ModelDemonstrator/loadShader.hpp"
 
 //transform
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "MatrixControl.hpp"
+#include "ModelDemonstrator/MatrixControl.hpp"
 
 #define GLFW_DLL
 
@@ -167,7 +167,7 @@ int main(){
     glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
 
-    GLuint programID = LoadShaders( "vertexshader", "fragmentshader" );
+    GLuint programID = LoadShaders( "ModelDemonstrator/vertexshader", "ModelDemonstrator/fragmentshader" );
 
 	do{
     	// Clear the screen. It's not mentioned before Tutorial 02, but it can cause flickering, so it's there nonetheless.
