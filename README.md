@@ -41,6 +41,7 @@ For student that first learned a thing or two on Atomic Physic, and want to have
 * Model Demonstrator
     * Demonstrate model
     * Respond to users action
+
 ## Engineering infrastructure
 
 This project would use 
@@ -63,8 +64,9 @@ This project would use
 |15 |12/21| Prepare for presentation                          |
 
   
-
- 
+## Reference
+* https://github.com/opengl-tutorials/ogl
+* https://en.wikipedia.org/wiki/Hydrogen_atom
 
 
 
