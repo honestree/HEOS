@@ -10,10 +10,15 @@ HEOS can generate a 3D model by type in principal quantum number and azimuthal q
 User can use mouse to drag around the model, zoom in, zoom out and select magnetic quantum number to show the model partically.
 ![](https://i.imgur.com/tp0BtPp.png)
 
-## Problem to solve
+## The approach
 
-This project would use to calculate
+The whole model is actually composed of lots of different sized tiny spheres. The bigger the sphere, the higher probablity a electron can be found at the center of the sphere.
+
+To create such model, HEOS would first create a list of lattice points. These points would later use single electron wave function to calcalate the probablity. Then a scene is created by adding sphere by probablity and position.
+
 ![](https://i.imgur.com/41VUfMK.png)
+> the single electron wavefunction given in spherical coordinate system
+
 ## Perspective users
 
 For student that first learned a thing or two on Atomic Physic, and want to have a brief idea for what these quantum number might affect on the orbit model.
@@ -21,8 +26,6 @@ For student that first learned a thing or two on Atomic Physic, and want to have
 ## System architecture
 
 ![](https://i.imgur.com/rYGtujQ.png)
-
-
 
 ## API description
 
