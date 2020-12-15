@@ -80,7 +80,6 @@ bool Polynomial::operator==( Polynomial const &other ){
     return true;
 }
 
-
 void Polynomial::removeZero(){
 
     while( this->parameters.back() == 0 && this->parameters.size() > 1 ){
@@ -91,4 +90,35 @@ void Polynomial::removeZero(){
 }
 
 
+double Polynomial::value( double x ){
+
+    double ans = 0;
+
+    for( int index = this->parameters.size() - 1; index > 0; index-- ){
+        ans += this->parameters[ index ];
+        ans *= x;
+    }
+    ans += this->parameters[ 0 ];
+
+    return ans;
+}
+
+void Polynomial::differential(){
+
+    for( int i = 1 ; i < this->parameters.size(); ++i ){
+
+        this->parameters[ i - 1 ] = this->parameters[ i ] * i;
+    }
+
+    if( this->parameters.size() > 1 ){
+
+        this->parameters.pop_back();
+    }
+    else{
+
+        this->parameters[0] = 0;
+    }
+
+    return;
+}
 

@@ -19,6 +19,7 @@ class Polynomial{
             parameters = other.parameters;
         }
 
+        //operators
         double operator()( int pos ) const { return parameters[ pos ]; }
         double &operator()( int pos ){ return parameters[ pos ]; }
         Polynomial operator+( Polynomial const &other );
@@ -26,6 +27,10 @@ class Polynomial{
         Polynomial operator*( double scalar );
         Polynomial operator*( Polynomial const &other );
         bool operator==( Polynomial const &other );
+
+        //others
+        double value( double x );
+        void differential();
 
     private:
         // value store as parameter, postion stands for the index of x
