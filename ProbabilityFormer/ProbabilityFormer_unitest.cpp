@@ -1,6 +1,9 @@
-#include "Polynomial.hpp"
 #include <cstdio>
-  
+
+// Include homehade hpp
+#include "Polynomial.hpp"
+#include "WaveFunc.hpp"
+
 //using googletest
 #include <gtest/gtest.h>
 
@@ -66,6 +69,26 @@ TEST( Polynomial, differential ){
     EXPECT_EQ( test.value( 8 ), 14 );
 
 }
+
+TEST( WaveFunc, Laguerre ){
+
+    WaveFunc calcul;
+    Polynomial ans;
+    Polynomial expect;
+
+    expect = Polynomial( std::vector<double>{ 1, -1 } );
+    ans = calcul.Laguerre( 1 );
+    EXPECT_TRUE( ans == expect );
+
+    expect = Polynomial( std::vector<double>{ 720, -4320, 5400, -2400, 450, -36, 1 } );
+    expect = expect / 720;
+    ans = calcul.Laguerre( 6 );
+    EXPECT_TRUE( ans == expect );
+
+
+
+}
+
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
