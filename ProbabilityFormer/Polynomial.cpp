@@ -1,5 +1,6 @@
 #include "Polynomial.hpp"
 #include <cstdio>
+#include <cstdlib>
 
 Polynomial Polynomial::operator+( Polynomial const &other ){
 
@@ -77,7 +78,7 @@ bool Polynomial::operator==( Polynomial const &other ){
 
     for( int i = 0 ; i < this->parameters.size() ; ++i ){
 
-        if( this->parameters[ i ] != other.parameters[ i ] ){
+        if( abs( this->parameters[ i ] - other.parameters[ i ] ) > 0.00000000000000000000000000001 ){
             printf( " position different at %d: %lf vs %lf  \n", i , this->parameters[i] , other.parameters[ i ] );
             return false;
         }
