@@ -30,6 +30,11 @@ TEST(Polynomial, Operator ) {
     expect = Polynomial( std::vector<double>{ 9, -7 } );
     EXPECT_TRUE( ans == expect );
 
+    ans = ans / 2;
+    expect = Polynomial( std::vector<double>{ 4.5, -3.5 } );
+    EXPECT_TRUE( ans == expect );
+
+
     ans = test_b * test_a;
     expect = Polynomial( std::vector<double>{ -1 , 0 , 1 });
     EXPECT_TRUE( ans == expect );

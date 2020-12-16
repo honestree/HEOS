@@ -25,6 +25,7 @@ class Polynomial{
         Polynomial operator+( Polynomial const &other );
         Polynomial operator-( Polynomial const &other );
         Polynomial operator*( double scalar );
+        Polynomial operator/( double scalar );
         Polynomial operator*( Polynomial const &other );
         bool operator==( Polynomial const &other );
 

@@ -63,6 +63,11 @@ Polynomial Polynomial::operator*( Polynomial const &other ){
     return ans;
 }
 
+Polynomial Polynomial::operator/( double scalar ){
+    return *this * ( 1 / scalar );
+}
+
+
 bool Polynomial::operator==( Polynomial const &other ){
 
     if( this->parameters.size() != other.parameters.size() ){
