@@ -78,7 +78,7 @@ bool Polynomial::operator==( Polynomial const &other ){
 
     for( int i = 0 ; i < this->parameters.size() ; ++i ){
 
-        if( abs( this->parameters[ i ] - other.parameters[ i ] ) > 0.00000000000000000000000000001 ){
+        if( abs( this->parameters[ i ] - other.parameters[ i ] ) > 1e-40 ){
             printf( " position different at %d: %lf vs %lf  \n", i , this->parameters[i] , other.parameters[ i ] );
             return false;
         }
