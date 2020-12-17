@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <cmath>
 
 // Include homehade hpp
 #include "Polynomial.hpp"
@@ -72,7 +73,7 @@ TEST( Polynomial, differential ){
 
 TEST( WaveFunc, Laguerre ){
 
-    WaveFunc calcul;
+    WaveFunc calcul( 1, 0, 0 );
     Polynomial ans;
     Polynomial expect;
 
@@ -85,10 +86,30 @@ TEST( WaveFunc, Laguerre ){
     ans = calcul.Laguerre( 6 );
     EXPECT_TRUE( ans == expect );
 
-
-
 }
 
+TEST( WaveFunc, RBF ){
+
+    WaveFunc WF1( 1, 0, 0 );
+    WaveFunc WF2( 2 ,1, 0 );
+    WaveFunc WF3( 3 ,2, 0 );
+    double ans;
+    double expect;
+    double t_rad = 1e-9;
+
+    ans = WF1.RBF( t_rad );
+    expect = 2 * exp( -1 * t_rad / BohrRad ) / pow(BohrRad,(1.5));
+    EXPECT_TRUE( abs( ans - expect ) < 1e-10  );
+
+    ans = WF2.RBF( t_rad );
+    expect = pow( 24, -0.5 ) * pow(BohrRad,-1.5 ) * ( t_rad/BohrRad ) * exp( -0.5 * t_rad / BohrRad );
+    EXPECT_TRUE( abs( ans - expect ) < 1e-10  );
+
+    ans = WF3.RBF( t_rad );
+    expect = 4/(81 * pow(30,0.5)) * pow(BohrRad,-1.5) * pow( t_rad/BohrRad , 2 )*exp( -1 * t_rad/3/BohrRad ) ;
+    EXPECT_TRUE( abs( ans - expect ) < 1e-10  );
+
+}
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
