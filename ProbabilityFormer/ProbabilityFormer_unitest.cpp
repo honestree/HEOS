@@ -111,6 +111,34 @@ TEST( WaveFunc, RBF ){
 
 }
 
+
+TEST( WaveFunc, SH ){
+
+    WaveFunc WF1( 1, 0, 0 );
+    WaveFunc WF2( 2 ,1, 0 );
+    WaveFunc WF3( 3 ,2, 2 );
+    double t_theta = 0.69;
+    double t_phi = 0.39;
+
+    std::complex<double> ans;
+    std::complex<double> expect;
+
+    ans = WF1.SH( t_theta , t_phi );
+    expect = std::complex<double>( pow( 4 * M_PI , -0.5 ) , 0 );
+    EXPECT_TRUE( abs( std::real( ans - expect ) ) < 1e-10  );
+
+    ans = WF2.SH( t_theta , t_phi );
+    expect = std::complex<double>( pow( 3 ,0.5 ) * cos( t_theta ) * pow( 4 * M_PI , -0.5 ) , 0 );
+    EXPECT_TRUE( abs( std::real( ans - expect ) ) < 1e-10  );
+
+    ans = WF3.SH( t_theta , t_phi );
+    expect = std::complex<double>( cos( 2 * t_phi ) , sin( 2 * t_phi ));
+    expect *= pow( sin( t_theta) , 2)* pow(15,0.5) * pow( 32 * M_PI , -0.5 ) ;
+    EXPECT_TRUE( abs( std::real( ans - expect ) ) < 1e-10  );
+
+
+}
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

@@ -2,6 +2,7 @@
 #include <vector>
 #include <cstdlib>
 #include <map>
+#include <complex>
 #include "Polynomial.hpp"
 
 #define BohrRad 5.29177210903e-11
@@ -19,9 +20,14 @@ class WaveFunc{
 
         Polynomial Laguerre( int i );
         Polynomial ExtLaguerre( int QN, int QL );
+        Polynomial Rodrigues( int QL, int QM );
 
         // Radial Basis Function
         double RBF( double Radial );
+        // Spherical harmonics
+        std::complex<double> SH( double theta, double phi );
+
+        double probability( double Radial, double theta, double phi );
 
     private:
         // Quantum Numbers
@@ -36,5 +42,9 @@ class WaveFunc{
 
         //Calculated By <QN, QL>, therefore stored in map
         static std::map< std::pair<int, int>, Polynomial> ExtLaguerreStore;
+
+        //Calculated By <QL, QM>, therefore stored in map
+        static std::map< std::pair<int, int>, Polynomial> RodriguesStore;
+
 };
 
