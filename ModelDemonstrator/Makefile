@@ -1,0 +1,23 @@
+.PHONY: clean all
+
+CXX = g++
+GL_FLAG = -lglfw -lGL -lm -lX11 -lpthread -lXi -lXrandr -ldl -lGLEW
+ModelDemonstrator_O = MatrixControl.o loadShader.o ModelDemonstrator.o
+
+LIBARY_O = ${ModelDemonstrator_O}
+
+
+all: ${LIBARY_O}
+
+MatrixControl.o: MatrixControl.hpp MatrixControl.cpp
+	${CXX} -c MatrixControl.cpp
+
+loadShader.o: loadShader.cpp loadShader.hpp
+	${CXX} -c loadShader.cpp
+
+ModelDemontrator.o: ModelDemonstrator.cpp ModelDemonstrator.hpp
+	${CXX} -c ModelDemonstrator.cpp
+
+clean:
+	rm -rf *.o */*.gch 
+
