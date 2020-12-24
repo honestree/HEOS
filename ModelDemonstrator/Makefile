@@ -2,7 +2,7 @@
 
 CXX = g++
 GL_FLAG = -lglfw -lGL -lm -lX11 -lpthread -lXi -lXrandr -ldl -lGLEW
-ModelDemonstrator_O = MatrixControl.o loadShader.o ModelDemonstrator.o
+ModelDemonstrator_O = MatrixControl.o loadShader.o ModelDemonstrator.o ModelLoader.o
 
 LIBARY_O = ${ModelDemonstrator_O}
 
@@ -17,6 +17,9 @@ loadShader.o: loadShader.cpp loadShader.hpp
 
 ModelDemontrator.o: ModelDemonstrator.cpp ModelDemonstrator.hpp
 	${CXX} -c ModelDemonstrator.cpp
+
+ModelLoader.o: ModelLoader.cpp ModelLoader.hpp
+	${CXX} -c ModelLoader.cpp
 
 clean:
 	rm -rf *.o */*.gch 
