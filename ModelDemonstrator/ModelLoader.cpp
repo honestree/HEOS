@@ -14,7 +14,7 @@ struct Header{
 
 // ModelLoader would read **ascii ply file** and put vertex in out_vertex by the order of ply/face
 
-int ModelLoader( char* filename, std::vector<GLfloat> &out_vertex, std::vector<GLfloat> &out_color){
+int ModelLoader( const char* filename, std::vector<GLfloat> &out_vertex, std::vector<GLfloat> &out_color){
 
     //load ply object
     std::ifstream fp;

@@ -4,7 +4,7 @@
 #include <iostream>
 #include <fstream>
 
-void ModelGenerator( char* output_file, std::vector<Model_element> model_element ){
+void ModelGenerator( const char* output_file, std::vector<Model_element> model_element ){
     std::ofstream fp;
     fp.open( output_file );
 
@@ -39,11 +39,24 @@ void AddTetrahedron( Model_element pos,
                      std::vector<glm::vec3> &colors, 
                      std::vector<glm::uvec3> &faces
                     ){
+    
+    double colorchange = log10( pos.probability );
 
-    glm::vec3 reg_tetra1( 0.5 , 0 , -0.5 / sqrt(2) );
-    glm::vec3 reg_tetra2( -0.5 , 0 , -0.5 / sqrt(2) );
-    glm::vec3 reg_tetra3( 0 , -0.5 , 0.5 / sqrt(2) );
-    glm::vec3 reg_tetra4( 0 , 0.5 , 0.5 / sqrt(2) );
+    /*    
+    if( colorchange < 24.0 ){
+        return;
+    }
+    else if( colorchange > 40.0 ){
+        colorchange = 20;
+        return;
+    }
+    */
+    if(fabs(colorchange - 24.0) > 1.0) return;
+
+    glm::vec3 reg_tetra1( 0.05 , 0 , -0.05 / sqrt(2.0) );
+    glm::vec3 reg_tetra2( -0.05 , 0 , -0.05 / sqrt(2.0) );
+    glm::vec3 reg_tetra3( 0 , -0.05 , 0.05 / sqrt(2.0) );
+    glm::vec3 reg_tetra4( 0 , 0.05 , 0.05 / sqrt(2.0) );
     glm::vec3 ver_color( 1 , 1 , 0 );
     glm::vec3 central_p ( 
         pos.r * sin( pos.theta ) * cos( pos.phi ),
@@ -52,24 +65,25 @@ void AddTetrahedron( Model_element pos,
     );
     unsigned vector_size = vertexs.size();
 
-    reg_tetra1 = central_p + reg_tetra1 * pos.size;
-    reg_tetra2 = central_p + reg_tetra2 * pos.size;
-    reg_tetra3 = central_p + reg_tetra3 * pos.size;
-    reg_tetra4 = central_p + reg_tetra4 * pos.size;
-    ver_color *= std::min( (float) 1 , pos.size/10 );
+    reg_tetra1 = central_p + reg_tetra1 ;
+    reg_tetra2 = central_p + reg_tetra2 ;
+    reg_tetra3 = central_p + reg_tetra3 ;
+    reg_tetra4 = central_p + reg_tetra4 ;
+    ver_color *= std::min( ( colorchange ) , 24.0 )/24.0;
     
     vertexs.push_back( reg_tetra1 );
     vertexs.push_back( reg_tetra2 );
     vertexs.push_back( reg_tetra3 );
     vertexs.push_back( reg_tetra4 );
-    colors.push_back( ver_color );
-    colors.push_back( ver_color );
-    colors.push_back( ver_color );
-    colors.push_back( ver_color );
     
-    faces.push_back( glm::uvec3( vector_size, vector_size+1, vector_size+2 ));
-    faces.push_back( glm::uvec3( vector_size+3, vector_size+1, vector_size+2 ));
-    faces.push_back( glm::uvec3( vector_size+3, vector_size, vector_size+2 ));
+    colors.push_back( ver_color );
+    colors.push_back( ver_color );
+    colors.push_back( ver_color );
+    colors.push_back( ver_color );
+
+    faces.push_back( glm::uvec3( vector_size, vector_size+2, vector_size+1 ));
+    faces.push_back( glm::uvec3( vector_size+1, vector_size+2, vector_size+3 ));
+    faces.push_back( glm::uvec3( vector_size+3, vector_size+2, vector_size ));
     faces.push_back( glm::uvec3( vector_size+3, vector_size, vector_size+1 ));
 
     return;
