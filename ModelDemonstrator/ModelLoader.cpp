@@ -31,8 +31,9 @@ int ModelLoader( char* filename, std::vector<GLfloat> &out_vertex, std::vector<G
         return -1;  
     }
     while( getline( fp, tmp ) && tmp == std::string( "" )){}
-    if( tmp ==  std::string( "format ascii 1.0" ) ){
+    if( tmp !=  std::string( "format ascii 1.0" ) ){
         std::cout << "ply not coded in ASCII is not supported yet\n";
+        std::cout << "get this:" << tmp << std::endl;
 
         return -1;  
     }
