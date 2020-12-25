@@ -24,7 +24,7 @@ class MatrixControl{
         float speed = 3.0f; // 3 units / second
         float mouseSpeed = 0.05f;
         // use spherical coordinate system
-        float radius = 5;
+        float radius = 50;
         float theta = 0.78;
         float phi = 0.78;
 
