@@ -14,7 +14,7 @@ struct Header{
 
 // ModelLoader would read **ascii ply file** and put vertex in out_vertex by the order of ply/face
 
-int ModelLoader( char* filename, std::vector<GLfloat> &out_vertex, std::vector<GLfloat> &out_color){
+int ModelLoader( const char* filename, std::vector<GLfloat> &out_vertex, std::vector<GLfloat> &out_color){
 
     //load ply object
     std::ifstream fp;
@@ -31,8 +31,9 @@ int ModelLoader( char* filename, std::vector<GLfloat> &out_vertex, std::vector<G
         return -1;  
     }
     while( getline( fp, tmp ) && tmp == std::string( "" )){}
-    if( tmp ==  std::string( "format ascii 1.0" ) ){
+    if( tmp !=  std::string( "format ascii 1.0" ) ){
         std::cout << "ply not coded in ASCII is not supported yet\n";
+        std::cout << "get this:" << tmp << std::endl;
 
         return -1;  
     }

@@ -46,9 +46,9 @@ void MatrixControl::ComputeMatricesFromInputs( GLFWwindow * thiswin ){
 
     float FoV = initialFoV;
     // Projection matrix : 45&deg; Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
-    ProjectionMatrix = glm::perspective(glm::radians(FoV), (float)winwid / (float)winhei, 0.1f, 100.0f);
+    ProjectionMatrix = glm::perspective(glm::radians(FoV), (float)winwid / (float)winhei, 0.1f, 900.0f);
     // Camera matrix
-    ViewMatrix       = glm::lookAt(
+    ViewMatrix = glm::lookAt(
                 position,           // Camera is here
                 vec3(0,0,0),        // and looks here : at the same position, plus "direction"
                 up                  // Head is up (set to 0,-1,0 to look upside-down)

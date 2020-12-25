@@ -17,7 +17,8 @@
 #include "ModelLoader.hpp"
 
 #define GLFW_DLL
-#define OBJFILE "model.ply"
+
+char const *OBJFILE = "model.ply";
 
 using namespace glm;
 
