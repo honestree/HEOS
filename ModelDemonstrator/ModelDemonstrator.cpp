@@ -67,9 +67,9 @@ int ModelDemonstrator(){
     glGenVertexArrays(1, &VertexArrayID);
     glBindVertexArray(VertexArrayID);
 
-    glEnable( GL_DEPTH_TEST );
-    glDepthFunc(GL_LESS);
-    glEnable(GL_CULL_FACE);
+    //glEnable( GL_DEPTH_TEST );
+    //glDepthFunc(GL_LESS);
+    //glEnable(GL_CULL_FACE);
 
     std::vector<GLfloat> g_vertex_buffer_data;
     std::vector<GLfloat> g_color_buffer_data;
