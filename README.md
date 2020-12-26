@@ -8,13 +8,13 @@ The GitHub repository (URL) hosting the term project: https://github.com/honestr
 HEOS can generate a 3D model by type in principal quantum number and azimuthal quantum number.
 
 User can use mouse to drag around the model, zoom in, zoom out and select magnetic quantum number to show the model partically.
-![](https://i.imgur.com/tp0BtPp.png)
+![](https://i.imgur.com/tXWJm6U.png)
 
 ## The approach
 
-The whole model is actually composed of lots of different sized tiny spheres. The bigger the sphere, the higher probablity a electron can be found at the center of the sphere.
+The whole model is actually composed of lots of different sized tiny tetrahedron. The brighter the tetrahedron, the higher probablity a electron can be found at the center of the tetrahedron.
 
-To create such model, HEOS would first create a list of lattice points. These points would later use single electron wave function to calcalate the probablity. Then a scene is created by adding sphere by probablity and position.
+To create such model, HEOS would first create a list of lattice points. These points would later use single electron wave function to calcalate the probablity. Then a scene is created by adding tetrahedron by probablity and position.
 
 ![](https://i.imgur.com/41VUfMK.png)
 > the single electron wavefunction given in spherical coordinate system
@@ -48,9 +48,13 @@ For student that first learned a thing or two on Atomic Physic, and want to have
 ## Engineering infrastructure
 
 This project would use 
-* Python act as a interact frontend
 * C++ to perform math calculate
-* OpenGL to draw the model.
+* OpenGL to render the model.
+
+## TODO
+
+* Better UI
+* Option to render all magnetic quantum number at same time
 
 ## Schedule
 
