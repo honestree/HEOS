@@ -9,4 +9,4 @@ struct ModelElement{
 };
 
 
-bool Model_cmp( ModelElement a , ModelElement b );
+bool ModelCmp( struct ModelElement a ,struct ModelElement b );
