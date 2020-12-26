@@ -5,7 +5,20 @@
 #include <vector>
 #include "ModelElement.hpp"
 
+class ModelGenerator{
 
-void ModelGenerator(  const char* output_file, std::vector<ModelElement> model_element );
+    public:
 
-void AddTetrahedron( ModelElement pos, std::vector<glm::vec3> &vertexs, std::vector<glm::vec3> &colors, std::vector<glm::uvec3> &faces);
+        ModelGenerator(){}
+        ~ModelGenerator(){}
+        int AddModelElements( std::vector<struct ModelElement> modelElements );
+        int MakeModel(const char* output_file);
+
+    private:
+    
+        int addTetrahedron( struct ModelElement model );
+        glm::vec3 visualColor( float index );
+        std::vector<glm::vec3> vertexs;
+        std::vector<glm::vec3> colors;
+        std::vector<glm::uvec3> faces;
+};

@@ -14,30 +14,42 @@ int main( int argc , char* argv[] ){
     }
     WaveFunc WF1( atoi( argv[1] ), atoi( argv[2] ), atoi( argv[3] ) );
     std::default_random_engine generator;
-    std::uniform_real_distribution<double> rand_dev(-0.08,0.08);
-    std::vector<struct ModelElement> model_element;
+    std::uniform_real_distribution<double> rand_dev(-15,15);
+    std::vector<struct ModelElement> modelElements;
     char const *filename = "model.ply";
-    
-    std::cout << "start model" << std::endl;
 
-    for( float r = 200 ; r > 0 ; r-= ( 0.1 + rand_dev( generator ) )){
-        for( float theta = 0; theta < 2 * M_PI; theta += (0.1 + rand_dev( generator )) ){
-            for( float phi = 0; phi < 2 * M_PI; phi += (0.1+ rand_dev( generator )) ){
-                model_element.push_back( 
-                    ModelElement{
-                        r,
-                        theta,
-                        phi,
-                        WF1.probability( r * 4e-10, theta , phi )
-                    }
-                );
+    unsigned int rounds = 300000;
+    
+    std::cout << "Creating Model..." << std::endl;
+
+    std::cout << "Calculating probability" << std::endl;
+
+    for( unsigned int i = 0 ; i < rounds ; ++i ){
+        double x = rand_dev( generator );
+        double y = rand_dev( generator );
+        double z = rand_dev( generator );
+        double r = sqrt( x * x + y * y + z * z  );
+        
+        if( x * y * z != 0 ){    
+            struct ModelElement tmp{
+                (float) r,
+                (float) acos( z/r ),
+                (float) atan2( y, x ),
+                WF1.probability( r * 1e-10, acos( z / r ) , atan2( y,x ) )
+            };    
+            if( tmp.probability > 10 ){
+                modelElements.push_back( tmp );
             }
         }
     }
-    
-    std::cout << "vector finished" << std::endl;
-    
-    ModelGenerator( filename , model_element );
 
+    std::cout << "Sorting element" << std::endl;
+    std::sort( modelElements.begin(), modelElements.end(), ModelCmp);
+    
+    std::cout << "Creating Model with "<< modelElements.size() << " vertices"  << std::endl;
+    ModelGenerator modelGenerator;
+    modelGenerator.AddModelElements( modelElements );
+    modelGenerator.MakeModel( filename );
+    
     ModelDemonstrator();
 }

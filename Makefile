@@ -3,7 +3,7 @@
 CXX = g++
 GL_FLAG = -lglfw -lGL -lm -lX11 -lpthread -lXi -lXrandr -ldl -lGLEW
 ModelDemonstrator_O = MatrixControl.o loadShader.o ModelDemonstrator.o ModelLoader.o
-ModelGenerator_O = ModelGenerator.o
+ModelGenerator_O = ModelGenerator.o ModelElement.o
 ProbabilityFormer_O = Polynomial.o WaveFunc.o
 
 LIBARY_O = ${ModelDemonstrator_O} ${ModelGenerator_O} ${ProbabilityFormer_O}
@@ -30,6 +30,9 @@ ModelLoader.o: ModelDemonstrator/ModelLoader.cpp ModelDemonstrator/ModelLoader.h
 
 ModelGenerator.o: ModelGenerator/ModelGenerator.cpp ModelGenerator/ModelGenerator.hpp
 	${CXX} -c ModelGenerator/ModelGenerator.cpp
+
+ModelElement.o: ModelGenerator/ModelElement.cpp ModelGenerator/ModelElement.hpp
+	${CXX} -c ModelGenerator/ModelElement.cpp
 
 HEOS: main.cpp ${LIBARY_O}
 	${CXX} main.cpp ${LIBARY_O} -o HEOS ${GL_FLAG}

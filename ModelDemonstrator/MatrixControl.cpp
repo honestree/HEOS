@@ -28,11 +28,11 @@ void MatrixControl::ComputeMatricesFromInputs( GLFWwindow * thiswin ){
 
     // Move outward
     if (glfwGetKey( thiswin , GLFW_KEY_UP ) == GLFW_PRESS){
-        radius += deltaTime * speed;
+        radius *= ( 1 + speed );
     }
     // Move inward
     if (glfwGetKey( thiswin, GLFW_KEY_DOWN ) == GLFW_PRESS){
-        radius -= deltaTime * speed;
+        radius *= (1 - speed);
     }
 
     glm::vec3 position = vec3(

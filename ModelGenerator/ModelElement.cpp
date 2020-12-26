@@ -1,7 +1,7 @@
 #include "ModelElement.hpp"
 
-bool Model_cmp( struct ModelElement a , struct ModelElement b ){
+bool ModelCmp( struct ModelElement a , struct ModelElement b ){
 
-    return a.probability < b.probability;
+    return a.r > b.r;
 
 }

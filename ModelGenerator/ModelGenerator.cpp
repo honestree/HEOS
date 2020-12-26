@@ -3,18 +3,11 @@
 #include <iostream>
 #include <fstream>
 #include "ModelGenerator.hpp"
-#include "ModelElement.hpp"
 
-void ModelGenerator( const char* output_file, std::vector<struct ModelElement> model_element ){
+int ModelGenerator::MakeModel(const char* output_file){
+
     std::ofstream fp;
     fp.open( output_file );
-
-    std::vector<glm::vec3> vertexs;
-    std::vector<glm::vec3> colors;
-    std::vector<glm::uvec3> faces;
-    for( unsigned int i = 0 ; i < model_element.size(); i++ ){
-        AddTetrahedron( model_element[ i ], vertexs, colors, faces );
-    }
 
     fp << "ply\nformat ascii 1.0\n";
     fp << "element vertex "<< vertexs.size() << "\n";
@@ -32,37 +25,31 @@ void ModelGenerator( const char* output_file, std::vector<struct ModelElement> m
     }
 
     fp.close();
-    return;
+    return 0;
 }
 
-void AddTetrahedron( struct ModelElement pos,
-                     std::vector<glm::vec3> &vertexs,
-                     std::vector<glm::vec3> &colors, 
-                     std::vector<glm::uvec3> &faces
-                    ){
-    
-    double colorchange = log10( pos.probability );
 
-    /*    
-    if( colorchange < 24.0 ){
-        return;
-    }
-    else if( colorchange > 40.0 ){
-        colorchange = 20;
-        return;
-    }
-    */
-    if(fabs(colorchange - 24.0) > 1.0) return;
+int ModelGenerator::AddModelElements( std::vector<struct ModelElement> modelElements ){
 
-    glm::vec3 reg_tetra1( 0.05 , 0 , -0.05 / sqrt(2.0) );
-    glm::vec3 reg_tetra2( -0.05 , 0 , -0.05 / sqrt(2.0) );
-    glm::vec3 reg_tetra3( 0 , -0.05 , 0.05 / sqrt(2.0) );
-    glm::vec3 reg_tetra4( 0 , 0.05 , 0.05 / sqrt(2.0) );
-    glm::vec3 ver_color( 1 , 1 , 0 );
+    for( unsigned int i = 0 ; i < modelElements.size(); i++ ){
+        if( modelElements[ i ].probability > 10e+25 ){
+            addTetrahedron( modelElements[ i ] );
+        }
+    }
+    return 0;
+   
+}
+int ModelGenerator::addTetrahedron( struct ModelElement model ){
+   
+    glm::vec3 reg_tetra1( 0.1, 0, -0.1 / sqrt(2.0) );
+    glm::vec3 reg_tetra2( -0.1, 0, -0.1 / sqrt(2.0) );
+    glm::vec3 reg_tetra3( 0, -0.1, 0.1 / sqrt(2.0) );
+    glm::vec3 reg_tetra4( 0, 0.1, 0.1 / sqrt(2.0) );
+    glm::vec3 ver_color = visualColor( ( log10( model.probability ) - 25 )/ 2 );
     glm::vec3 central_p ( 
-        pos.r * sin( pos.theta ) * cos( pos.phi ),
-        pos.r * sin( pos.theta ) * sin( pos.phi ),
-        pos.r * cos( pos.theta )
+        model.r * sin( model.theta ) * cos( model.phi ),
+        model.r * sin( model.theta ) * sin( model.phi ),
+        model.r * cos( model.theta )
     );
     unsigned vector_size = vertexs.size();
 
@@ -70,7 +57,6 @@ void AddTetrahedron( struct ModelElement pos,
     reg_tetra2 = central_p + reg_tetra2 ;
     reg_tetra3 = central_p + reg_tetra3 ;
     reg_tetra4 = central_p + reg_tetra4 ;
-    ver_color *= std::min( ( colorchange ) , 24.0 )/24.0;
     
     vertexs.push_back( reg_tetra1 );
     vertexs.push_back( reg_tetra2 );
@@ -87,5 +73,37 @@ void AddTetrahedron( struct ModelElement pos,
     faces.push_back( glm::uvec3( vector_size+3, vector_size+2, vector_size ));
     faces.push_back( glm::uvec3( vector_size+3, vector_size, vector_size+1 ));
 
-    return;
+    return 0;
+}
+
+glm::vec3 ModelGenerator::visualColor( float index ){
+
+    if( index > 1 ){
+        return glm::vec3( 1, 1, 1);
+    }
+    else if( index < 0 ){
+        return glm::vec3( 0, 0, 0);
+    }
+    glm::vec3 purple(  89.0/255.0,  32.0/255.0, 122.0/255.0 );    //15%
+    glm::vec3 red   ( 198.0/255.0,  64.0/255.0,  70.0/255.0 );    //30%
+    glm::vec3 orange( 251.0/255.0, 120.0/255.0,  14.0/255.0 );    //50%
+    glm::vec3 yellow( 255.0/255.0, 193.0/255.0,  67.0/255.0 );    //72.5%
+    glm::vec3 white (           1,           1,           1 );    //100%
+
+    if( index < 0.15 ){
+        return purple * ( index / 0.15f );
+    }
+    else if( index < 0.3){
+        return red * (( index - 0.15f )/0.15f) + purple * (( 0.3f - index )/0.15f);
+    }
+    else if( index < 0.5){
+        return orange * (( index - 0.3f )/0.20f) + red * (( 0.5f - index )/0.20f);
+    }
+    else if( index < 0.725){
+        return yellow * (( index - 0.5f )/0.225f) + orange * (( 0.725f - index )/0.225f);
+    }
+    else{
+        return white * (( index - 0.725f )/0.275f) + yellow * (( 1.0f - index )/0.275f);
+    }
+
 }
