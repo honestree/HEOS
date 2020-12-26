@@ -15,16 +15,16 @@ int main( int argc , char* argv[] ){
     WaveFunc WF1( atoi( argv[1] ), atoi( argv[2] ), atoi( argv[3] ) );
     std::default_random_engine generator;
     std::uniform_real_distribution<double> rand_dev(-0.08,0.08);
-    std::vector<Model_element> model_element;
+    std::vector<struct ModelElement> model_element;
     char const *filename = "model.ply";
     
     std::cout << "start model" << std::endl;
 
-    for( float r = 0 ; r < 200 ; r+= ( 0.1 + rand_dev( generator ) )){
+    for( float r = 200 ; r > 0 ; r-= ( 0.1 + rand_dev( generator ) )){
         for( float theta = 0; theta < 2 * M_PI; theta += (0.1 + rand_dev( generator )) ){
             for( float phi = 0; phi < 2 * M_PI; phi += (0.1+ rand_dev( generator )) ){
                 model_element.push_back( 
-                    Model_element{
+                    ModelElement{
                         r,
                         theta,
                         phi,
