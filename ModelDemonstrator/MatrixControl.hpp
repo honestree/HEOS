@@ -21,7 +21,7 @@ class MatrixControl{
         // Initial Field of View
         float initialFoV = 45.0f;
 
-        float speed = 20.0f; // 3 units / second
+        float speed = 0.01f; // 3 units / second
         float mouseSpeed = 0.05f;
         // use spherical coordinate system
         float radius = 40;
