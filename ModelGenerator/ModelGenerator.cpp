@@ -1,10 +1,11 @@
-#include "ModelGenerator.hpp"
 #include <cmath>
 #include <algorithm>
 #include <iostream>
 #include <fstream>
+#include "ModelGenerator.hpp"
+#include "ModelElement.hpp"
 
-void ModelGenerator( const char* output_file, std::vector<Model_element> model_element ){
+void ModelGenerator( const char* output_file, std::vector<struct ModelElement> model_element ){
     std::ofstream fp;
     fp.open( output_file );
 
@@ -34,7 +35,7 @@ void ModelGenerator( const char* output_file, std::vector<Model_element> model_e
     return;
 }
 
-void AddTetrahedron( Model_element pos,
+void AddTetrahedron( struct ModelElement pos,
                      std::vector<glm::vec3> &vertexs,
                      std::vector<glm::vec3> &colors, 
                      std::vector<glm::uvec3> &faces

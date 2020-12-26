@@ -3,16 +3,9 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <vector>
-
-struct Model_element{
-    
-    float r;
-    float theta;
-    float phi;
-    double probability;    
-};
+#include "ModelElement.hpp"
 
 
-void ModelGenerator(  const char* output_file, std::vector<Model_element> model_element );
+void ModelGenerator(  const char* output_file, std::vector<ModelElement> model_element );
 
-void AddTetrahedron( Model_element pos, std::vector<glm::vec3> &vertexs, std::vector<glm::vec3> &colors, std::vector<glm::uvec3> &faces);
+void AddTetrahedron( ModelElement pos, std::vector<glm::vec3> &vertexs, std::vector<glm::vec3> &colors, std::vector<glm::uvec3> &faces);
