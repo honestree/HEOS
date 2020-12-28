@@ -56,7 +56,6 @@ This project would use
 
 * Better UI
 * Option to render all magnetic quantum number at same time
-* Wrap whole project as a library
 
 ## Schedule
 

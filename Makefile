@@ -5,10 +5,14 @@ GL_FLAG = -lglfw -lGL -lm -lX11 -lpthread -lXi -lXrandr -ldl -lGLEW
 ModelDemonstrator_O = MatrixControl.o loadShader.o ModelDemonstrator.o ModelLoader.o
 ModelGenerator_O = ModelGenerator.o ModelElement.o
 ProbabilityFormer_O = Polynomial.o WaveFunc.o
+RequestDealer_O = RequestDealer.o
 
-LIBARY_O = ${ModelDemonstrator_O} ${ModelGenerator_O} ${ProbabilityFormer_O}
+LIBARY_O = ${ModelDemonstrator_O} ${ModelGenerator_O} ${ProbabilityFormer_O} ${RequestDealer_O}
 
 all: ${LIBARY_O} HEOS
+
+RequestDealer.o: RequestDealer/RequestDealer.cpp RequestDealer/RequestDealer.hpp
+	${CXX} -c RequestDealer/RequestDealer.cpp
 
 Polynomial.o: ProbabilityFormer/Polynomial.cpp ProbabilityFormer/Polynomial.hpp
 	${CXX} -c ProbabilityFormer/Polynomial.cpp
