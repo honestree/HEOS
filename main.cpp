@@ -16,7 +16,7 @@ int main( int argc , char* argv[] ){
     std::default_random_engine generator;
     std::uniform_real_distribution<double> rand_dev(-15,15);
     std::vector<struct ModelElement> modelElements;
-    char const *filename = "model.ply";
+    char const *filename = "model69.ply";
 
     unsigned int rounds = 300000;
     
@@ -51,5 +51,5 @@ int main( int argc , char* argv[] ){
     modelGenerator.AddModelElements( modelElements );
     modelGenerator.MakeModel( filename );
     
-    ModelDemonstrator();
+    ModelDemonstrator( filename );
 }
