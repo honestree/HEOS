@@ -5,10 +5,11 @@
 
 The GitHub repository (URL) hosting the term project: https://github.com/honestree/HEOS
 
-HEOS can generate a 3D model by type in principal quantum number and azimuthal quantum number.
+HEOS can generate a 3D model by type in principal quantum number, azimuthal quantum number and magnetic quantum number.
 
-User can use mouse to drag around the model, zoom in, zoom out and select magnetic quantum number to show the model partically.
-![](https://i.imgur.com/tXWJm6U.png)
+User can use mouse to drag around the model, zoom in and zoom out.
+
+![](https://i.imgur.com/nCMnrcS.png)
 
 ## The approach
 
@@ -29,7 +30,7 @@ For student that first learned a thing or two on Atomic Physic, and want to have
 
 ## API description
 
-* User Interface 
+* User Interface << UNCOMPLETED
     * Collect user input
         * to generate new model
         * to interact with current model
@@ -55,6 +56,7 @@ This project would use
 
 * Better UI
 * Option to render all magnetic quantum number at same time
+* Wrap whole project as a library
 
 ## Schedule
 
