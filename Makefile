@@ -38,5 +38,5 @@ HEOS: main.cpp ${LIBARY_O}
 	${CXX} main.cpp ${LIBARY_O} -o HEOS ${GL_FLAG}
 
 clean:
-	rm -rf *.o */*.gch HEOS *.ply
+	rm -rf *.o */*.gch HEOS Models/*.ply
 
