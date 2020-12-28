@@ -52,7 +52,6 @@ int ModelLoader( const char* filename, std::vector<GLfloat> &out_vertex, std::ve
  
             fp >> HeaderList[index].name;
             fp >> HeaderList[index].size;
-            std::cout << " get element " << HeaderList[index].name << " size " <<  HeaderList[index].size << std::endl;
         }
         else if( tmp == std::string( "property" )){
             fp >> tmp;
