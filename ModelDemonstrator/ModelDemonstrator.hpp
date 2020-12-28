@@ -1,4 +1,4 @@
 #pragma once
 #include <vector>
 
-int ModelDemonstrator( const char* filename );
+int ModelDemonstrator( const char* filename, float distance );

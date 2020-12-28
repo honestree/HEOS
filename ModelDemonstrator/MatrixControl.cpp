@@ -45,8 +45,8 @@ void MatrixControl::ComputeMatricesFromInputs( GLFWwindow * thiswin ){
     glm::vec3 up = glm::cross( right, position );
 
     float FoV = initialFoV;
-    // Projection matrix : 45&deg; Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
-    ProjectionMatrix = glm::perspective(glm::radians(FoV), (float)winwid / (float)winhei, 0.1f, 900.0f);
+    // Projection matrix
+     ProjectionMatrix = glm::infinitePerspective(glm::radians(FoV), (float)winwid / (float)winhei, 0.1f );
     // Camera matrix
     ViewMatrix = glm::lookAt(
                 position,           // Camera is here

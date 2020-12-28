@@ -19,9 +19,10 @@
 #define GLFW_DLL
 using namespace glm;
 
-int ModelDemonstrator( const char* filename ){
+int ModelDemonstrator( const char* filename, float distance ){
 
     MatrixControl matrixController;
+    matrixController.SetCamaraRadius( distance );
 
     // Initialise GLFW
     glewExperimental = true; // Needed for core profile
