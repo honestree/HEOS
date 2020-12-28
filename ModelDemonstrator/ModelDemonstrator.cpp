@@ -17,12 +17,9 @@
 #include "ModelLoader.hpp"
 
 #define GLFW_DLL
-
-char const *OBJFILE = "model.ply";
-
 using namespace glm;
 
-int ModelDemonstrator(){
+int ModelDemonstrator( const char* filename ){
 
     MatrixControl matrixController;
 
@@ -75,7 +72,7 @@ int ModelDemonstrator(){
     std::vector<GLfloat> g_vertex_buffer_data;
     std::vector<GLfloat> g_color_buffer_data;
 
-    ModelLoader( OBJFILE, g_vertex_buffer_data, g_color_buffer_data );
+    ModelLoader( filename, g_vertex_buffer_data, g_color_buffer_data );
     
     // This will identify our vertex buffer
     GLuint vertexbuffer;
