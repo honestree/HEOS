@@ -18,6 +18,7 @@ class ModelGenerator{
         ~ModelGenerator(){}
         int AddModelElements( std::vector<struct ModelElement> modelElements );
         int MakeModel(const char* output_file);
+        int VerticesSize(){ return vertices.size(); }
 
     private:
     
@@ -31,7 +32,7 @@ class ModelGenerator{
         float size = 0.1; 
         
         glm::vec3 visualColor( float index );
-        std::vector<glm::vec3> vertexs;
+        std::vector<glm::vec3> vertices;
         std::vector<glm::vec3> colors;
         std::vector<glm::uvec3> faces;
 };
