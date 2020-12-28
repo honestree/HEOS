@@ -11,6 +11,7 @@ class MatrixControl{
 
     public:
         void ComputeMatricesFromInputs( GLFWwindow *);
+        void SetCamaraRadius( float r ){ radius = r; }
         glm::mat4 GetProjMat();
         glm::mat4 GetViewMat();
     private:
