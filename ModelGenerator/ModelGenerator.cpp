@@ -32,7 +32,7 @@ int ModelGenerator::MakeModel(const char* output_file){
 int ModelGenerator::AddModelElements( std::vector<struct ModelElement> modelElements ){
 
     for( unsigned int i = 0 ; i < modelElements.size(); i++ ){
-        if( modelElements[ i ].probability > 10e+25 ){
+        if( modelElements[ i ].probability > min ){
             addTetrahedron( modelElements[ i ] );
         }
     }
@@ -41,11 +41,11 @@ int ModelGenerator::AddModelElements( std::vector<struct ModelElement> modelElem
 }
 int ModelGenerator::addTetrahedron( struct ModelElement model ){
    
-    glm::vec3 reg_tetra1( 0.1, 0, -0.1 / sqrt(2.0) );
-    glm::vec3 reg_tetra2( -0.1, 0, -0.1 / sqrt(2.0) );
-    glm::vec3 reg_tetra3( 0, -0.1, 0.1 / sqrt(2.0) );
-    glm::vec3 reg_tetra4( 0, 0.1, 0.1 / sqrt(2.0) );
-    glm::vec3 ver_color = visualColor( ( log10( model.probability ) - 25 )/ 2 );
+    glm::vec3 reg_tetra1( 1, 0, -1 / sqrt(2.0) );
+    glm::vec3 reg_tetra2( -1, 0, -1 / sqrt(2.0) );
+    glm::vec3 reg_tetra3( 0, -1, 1 / sqrt(2.0) );
+    glm::vec3 reg_tetra4( 0, 1, 1 / sqrt(2.0) );
+    glm::vec3 ver_color = visualColor( ( log10( model.probability ) - ( pFocus - pVar ) )/ ( 2 * pVar ));
     glm::vec3 central_p ( 
         model.r * sin( model.theta ) * cos( model.phi ),
         model.r * sin( model.theta ) * sin( model.phi ),
@@ -53,10 +53,10 @@ int ModelGenerator::addTetrahedron( struct ModelElement model ){
     );
     unsigned vector_size = vertexs.size();
 
-    reg_tetra1 = central_p + reg_tetra1 ;
-    reg_tetra2 = central_p + reg_tetra2 ;
-    reg_tetra3 = central_p + reg_tetra3 ;
-    reg_tetra4 = central_p + reg_tetra4 ;
+    reg_tetra1 = central_p + reg_tetra1 * size;
+    reg_tetra2 = central_p + reg_tetra2 * size;
+    reg_tetra3 = central_p + reg_tetra3 * size;
+    reg_tetra4 = central_p + reg_tetra4 * size;
     
     vertexs.push_back( reg_tetra1 );
     vertexs.push_back( reg_tetra2 );
