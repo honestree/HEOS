@@ -21,21 +21,20 @@ int ModelLoader( const char* filename, std::vector<GLfloat> &out_vertex, std::ve
     std::string tmp;
     fp.open( filename , std::ifstream::in);
     if( !fp.is_open() ){
-        std::cout << "Error opening file\n";
-        return -1;
+        throw std::ios_base::failure( "Error opening file" );
+        return -1;         
     }
 
     //check if it is ply w/ ascii    
     if(  fp >> tmp && tmp !=  std::string( "ply" ) ){
-        std::cout << "File format unsupported\n";
-        return -1;  
+        throw std::ios_base::failure( "File format unsupported" );
+        return -1;
     }
     while( getline( fp, tmp ) && tmp == std::string( "" )){}
-    if( tmp !=  std::string( "format ascii 1.0" ) ){
-        std::cout << "ply not coded in ASCII is not supported yet\n";
-        std::cout << "get this:" << tmp << std::endl;
 
-        return -1;  
+    if( tmp !=  std::string( "format ascii 1.0" ) ){
+        throw std::ios_base::failure( "ply not coded in ASCII is not supported yet");
+        return -1;
     }
 
     //Read header
@@ -77,13 +76,24 @@ int ModelLoader( const char* filename, std::vector<GLfloat> &out_vertex, std::ve
         for( unsigned int j = 0 ; j < HeaderList[i].size; ++j  ){
             if( HeaderList[i].is_property_list == false ){
                 if( HeaderList[i].name == std::string( "vertex" ) ){
-                    if( HeaderList[i].property_array.size() != 6 ){
-                        std::cout << "missing color on vertex\n";
-                        return -1;
-                    }
+
                     GLfloat tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
+                    
+                    if( HeaderList[i].property_array.size() < 3 ){
+                        throw std::ios_base::failure( "Cannot interprete input file" );
+                    }
                     fp >> tmp1; fp >> tmp2; fp >> tmp3;
-                    fp >> tmp4; fp >> tmp5; fp >> tmp6;
+                  
+                    if( HeaderList[i].property_array.size() < 6 ){
+                        std::cout << "missing color on vertices\nuse white instead\n";
+                        tmp4 = 1.0;
+                        tmp5 = 1.0;
+                        tmp6 = 1.0;
+                    }
+                    else{
+                        fp >> tmp4; fp >> tmp5; fp >> tmp6;
+                    }
+
                     vertex_list.push_back(
                         std::pair<glm::vec3,glm::vec3>(
                             glm::vec3( tmp1, tmp2, tmp3 ),
