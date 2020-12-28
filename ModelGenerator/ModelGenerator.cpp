@@ -24,6 +24,12 @@ int ModelGenerator::MakeModel(const char* output_file){
         fp << "3 " << faces[i].x << " " << faces[i].y << " " << faces[i].z << "\n";
     }
 
+    if ( (fp.rdstate() & std::ifstream::failbit ) != 0 ){
+    
+        throw std::ios_base::failure( "Error Writing file" );
+        return -1;
+    }
+
     fp.close();
     return 0;
 }
