@@ -20,6 +20,11 @@ To create such model, HEOS would first create a list of lattice points. These po
 ![](https://i.imgur.com/41VUfMK.png)
 > the single electron wavefunction given in spherical coordinate system
 
+## How to start
+
+Using **make** to build the main.cpp
+You can also check main.cpp to learn how to use this packet
+
 ## Perspective users
 
 For student that first learned a thing or two on Atomic Physic, and want to have a brief idea for what these quantum number might affect on the orbit model.
@@ -55,8 +60,6 @@ This project would use
 ## TODO
 
 * Better UI
-* Option to render all magnetic quantum number at same time
-* Wrap whole project as a library
 
 ## Schedule
 
