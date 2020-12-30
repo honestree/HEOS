@@ -19,6 +19,12 @@ class RequestDealer{
             renderPMax = in.first;
             renderPMin = in.second;        
         }
+        double GetRenderRange(){ return renderRange; }
+        unsigned int GetRounds(){ return rounds; }
+        std::pair<double,double> GetColorScheme(){
+            return std::pair<double,double>( renderPMax, renderPMin );
+        }
+
     
 
     private:
