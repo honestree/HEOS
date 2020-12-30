@@ -2,6 +2,7 @@
 #include <iostream>
 #include <algorithm>
 #include <random>
+#include <sstream>
 #include <unistd.h>
 #include "../ModelDemonstrator/ModelDemonstrator.hpp"
 #include "../ModelGenerator/ModelGenerator.hpp"
@@ -11,15 +12,11 @@
 
 void RequestDealer::ShowModel( int N, int L, int M ){
    
-    std::string filename;
-  
-    filename += "Models/N";
-    filename += std::to_string( N );
-    filename += "L";
-    filename += std::to_string( L );
-    filename += "M";
-    filename += std::to_string( M );
-    filename += ".ply";
+    // Using string stream to set filename
+    std::ostringstream filename_tmp;
+    filename_tmp << "Models/N" << N << "L" << L << "M" << M;
+    filename_tmp << "P" << rounds << "UB" << renderPMax << "LB" << renderPMin << ".ply";
+    std::string filename = filename_tmp.str();
 
     // check if file generated
     if(( access( filename.c_str(), R_OK ) ) != -1){
