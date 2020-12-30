@@ -16,6 +16,8 @@
 #include "ModelDemonstrator.hpp"
 #include "ModelLoader.hpp"
 
+#include <iostream>
+
 #define GLFW_DLL
 using namespace glm;
 
@@ -30,7 +32,6 @@ int ModelDemonstrator( const char* filename, float distance ){
         fprintf( stderr, "Failed to initialize GLFW\n" );
         return -1;
     }
-
 
 	glfwWindowHint(GLFW_SAMPLES, 4); // 4x antialiasing
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // OpenGL 3.3
@@ -59,7 +60,6 @@ int ModelDemonstrator( const char* filename, float distance ){
     // mouse movement
     glfwPollEvents();
     glfwSetCursorPos(window, 1024/2, 768/2);
-
 
     //create a Vertex Array Object
     GLuint VertexArrayID;
@@ -91,8 +91,7 @@ int ModelDemonstrator( const char* filename, float distance ){
 
     GLuint programID = LoadShaders( "ModelDemonstrator/vertexshader", "ModelDemonstrator/fragmentshader" );
 
-	do{
-    	// Clear the screen. It's not mentioned before Tutorial 02, but it can cause flickering, so it's there nonetheless.
+    while( glfwGetKey(window, GLFW_KEY_ESCAPE ) != GLFW_PRESS ){
     	glClear( GL_COLOR_BUFFER_BIT );
 
 	    // Get a handle for our "MVP" uniform
@@ -146,7 +145,10 @@ int ModelDemonstrator( const char* filename, float distance ){
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUseProgram(programID);
 
-    } // Check if the ESC key was pressed or the window was closed
-    while( glfwGetKey(window, GLFW_KEY_ESCAPE ) != GLFW_PRESS && glfwWindowShouldClose(window) == 0 );
+    }
+
+    glfwDestroyWindow(window);
+
+    return 0;
 };
 
