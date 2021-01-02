@@ -52,7 +52,7 @@ int RequestDealer::generateModel( int N, int L, int M, const char* filename ){
 
     std::default_random_engine generator;
     std::uniform_real_distribution<double> rand_dev(renderRange * -1 , renderRange);
-   
+    modelElements.resize(0);
     for( unsigned int i = 0 ; i < rounds ; ++i ){
         double x = rand_dev( generator );
         double y = rand_dev( generator );
