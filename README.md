@@ -22,8 +22,23 @@ To create such model, HEOS would first create a list of lattice points. These po
 
 ## How to start
 
-Using **make** to build the main.cpp
-You can also check main.cpp to learn how to use this packet
+### Dependency
+
+* make 
+* g++
+* libglfw3-dev
+* libglm-dev
+* libglew-dev
+* libxi-dev
+
+### 
+```
+make
+mkdir Models
+./HEOS
+```
+
+You can also check main.cpp to learn how to link RequestDealer.
 
 ## Perspective users
 
